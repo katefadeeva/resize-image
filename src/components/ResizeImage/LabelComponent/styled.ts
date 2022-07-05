@@ -1,10 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const MarkContainer = styled.div<{top:number, left: number}>`
+export const LabelContainer = styled.div<{top: number; left: number}>`
   position: absolute;
   top: ${(p) => p.top}px;
   left: ${(p) => p.left}px;
-  z-index: 100500;
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
   display: flex;
   align-items: center;
   justify-content: center;

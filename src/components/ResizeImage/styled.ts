@@ -1,18 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const MainContainer = styled.div`
-  width: 100%;
+export const ImageContainer = styled.div<{isVertical: boolean}>`
+  height: ${(p) => (p.isVertical ? 'calc(100vh - 85px)' : 'auto')};
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 `;
-export const ImageContainer = styled.div<{isVertical: boolean}>`
-  height: ${(p) => p.isVertical ? 'calc(100vh - 85px)' : 'auto'};
-  width: auto;
-`;
 export const Image = styled.img<{isVertical: boolean}>`
-  width: ${(p) => p.isVertical ? 'auto' : '100%'};
-  height: ${(p) => p.isVertical ? '100%' : 'auto'};
+  width: ${(p) => (p.isVertical ? 'auto' : '100%')};
+  height: ${(p) => (p.isVertical ? '100%' : 'auto')};
   object-fit: contain;
   position: relative;
 `;

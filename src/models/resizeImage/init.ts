@@ -1,18 +1,24 @@
 import {
-  clearImage,
-  image$,
-  locationImageLeft$,
-  locationImageTop$,
-  marks$,
-  originalHeight$,
-  originalWidth$, imageHeight$, imageWidth$
-} from "./index";
+  removeImage,
+  imageUrl$,
+  positionImageLeft$,
+  positionImageTop$,
+  labels$,
+  originalImageHeight$,
+  originalImageWidth$,
+  imageHeight$,
+  imageWidth$,
+  domain,
+  ResizeImageGate,
+} from './index';
 
-image$.reset(clearImage);
-originalWidth$.reset(clearImage);
-originalHeight$.reset(clearImage);
-marks$.reset(clearImage);
-locationImageTop$.reset(clearImage);
-locationImageLeft$.reset(clearImage);
-imageWidth$.reset(clearImage);
-imageHeight$.reset(clearImage);
+domain.onCreateStore((store) => store.reset(ResizeImageGate.close));
+
+imageUrl$.reset(removeImage);
+originalImageWidth$.reset(removeImage);
+originalImageHeight$.reset(removeImage);
+labels$.reset(removeImage);
+positionImageTop$.reset(removeImage);
+positionImageLeft$.reset(removeImage);
+imageWidth$.reset(removeImage);
+imageHeight$.reset(removeImage);

@@ -1,33 +1,60 @@
-import React, {ChangeEvent} from 'react';
-import {useStore} from "effector-react";
+import React, {ChangeEvent, useRef} from 'react';
+import {useGate, useStore} from 'effector-react';
 import * as S from './styled';
-import {ImageResize} from "../ResizeImage";
-import {changeImage, changeOriginalHeight, changeOriginalWidth, clearImage, image$} from "../../models/resizeImage";
+import {ResizeImage} from '../ResizeImage';
+import {
+  changeImageUrl,
+  changeOriginalImageHeight,
+  changeOriginalImageWidth,
+  removeImage,
+  imageUrl$,
+  ResizeImageGate,
+} from '../../models/resizeImage';
 
 export function App() {
-  const image = useStore(image$);
+  useGate(ResizeImageGate);
+  const image = useStore(imageUrl$);
+  const refInput = useRef<HTMLInputElement | null>(null);
+
   const onUploadFile = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      const _URL = window.URL || window.webkitURL;
+      const URL = window.URL || window.webkitURL;
       const img = new Image();
-      img.onload = function () {
-        changeOriginalHeight(img.naturalHeight || img.height);
-        changeOriginalWidth(img.naturalWidth || img.width);
+      img.onload = () => {
+        changeOriginalImageHeight(img.naturalHeight || img.height);
+        changeOriginalImageWidth(img.naturalWidth || img.width);
       };
-      img.src = _URL.createObjectURL(event.target.files[0]);
-      changeImage(img.src);
+      img.src = URL.createObjectURL(event.target.files[0]);
+      changeImageUrl(img.src);
     }
   };
+
+  const resetFile = () => {
+    if (!refInput.current) {
+      return;
+    }
+    removeImage();
+    refInput.current.value = '';
+  };
+
   return (
     <S.MainContainer>
       <S.Header>
-        <S.Title>Image Resize</S.Title>
+        <S.Title>Resize Image</S.Title>
         <S.ActionContainer>
-          <input type="file" accept="image/*" onChange={onUploadFile} disabled={!!image}/>
-          <button type='button' onClick={() => clearImage()} disabled={!image}>Удалть картинку</button>
+          <input
+            ref={refInput}
+            type='file'
+            accept='image/*'
+            onChange={onUploadFile}
+            disabled={!!image}
+          />
+          <button type='button' onClick={resetFile} disabled={!image}>
+            Remove image
+          </button>
         </S.ActionContainer>
       </S.Header>
-      {image && <ImageResize />}
+      {image && <ResizeImage />}
     </S.MainContainer>
   );
 }

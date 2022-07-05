@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   margin: 0;
@@ -17,14 +17,19 @@ export const Header = styled.div`
   justify-content: center;
   gap: 10px;
   color: black;
+  height: 75px;
 `;
 
 export const Title = styled.header`
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
   font-size: 28px;
   padding-top: 10px;
 `;
 
 export const ActionContainer = styled.div`
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
   display: flex;
   align-items: center;
   gap: 20px;
