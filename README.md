@@ -5,11 +5,11 @@ The peculiarity is that when you change the size of the browser window, the pict
 
 ## On project was used
 
-### `React`
-### `TS`
-### `Effector` as state manager 
-### `styled-components` for styling the app
-### `uuid` for generation unical ID for labels
+`React`\
+`TS`\
+`Effector` as state manager \
+`styled-components` for styling the app\
+`uuid` for generation unique ID for labels
 
 ## Available Scripts
 
